@@ -5,12 +5,14 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Leave_Request_Form.Models;
 
-    public class Leave_Request_FormContext : DbContext
+public class Leave_Request_FormContext : DbContext
+{
+    public Leave_Request_FormContext(DbContextOptions<Leave_Request_FormContext> options)
+        : base(options)
     {
-        public Leave_Request_FormContext (DbContextOptions<Leave_Request_FormContext> options)
-            : base(options)
-        {
-        }
-
-        public DbSet<Leave_Request_Form.Models.Employee> Employee { get; set; } = default!;
     }
+
+    public DbSet<Leave_Request_Form.Models.Employee> Employee { get; set; } = default!;
+    public DbSet<Leave_Request_Form.Models.LeaveRequest> LeaveRequest { get; set; }
+
+}
