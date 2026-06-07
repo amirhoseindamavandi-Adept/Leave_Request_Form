@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Leave_Request_Form.Models;
+using Microsoft.EntityFrameworkCore.Design;
 
 namespace Leave_Request_Form.Controllers
 {
@@ -142,7 +143,8 @@ namespace Leave_Request_Form.Controllers
             var employee = await _context.Employee.FindAsync(id);
             if (employee != null)
             {
-                _context.Employee.Remove(employee);
+               // _context.Employee.Remove(employee);
+               employee.Removed(employee.EmployeeID);
             }
 
             await _context.SaveChangesAsync();

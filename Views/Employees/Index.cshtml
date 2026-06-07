@@ -11,30 +11,33 @@
 </p>
 <table class="table">
     <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Family)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreationDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.BossID)
-            </th>
-            <th>
+    <tr>
+      
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Family)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BossID)
+        </th>
+        @*   <th>
                 @Html.DisplayNameFor(model => model.IsRemoved)
-            </th>
-            <th></th>
-        </tr>
+            </th> *@
+        <th></th>
+    </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
+    if (item.IsRemoved == false)
+    {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
@@ -60,6 +63,7 @@
                 <a asp-action="Delete" asp-route-id="@item.EmployeeID">Delete</a>
             </td>
         </tr>
+    }
 }
     </tbody>
 </table>
