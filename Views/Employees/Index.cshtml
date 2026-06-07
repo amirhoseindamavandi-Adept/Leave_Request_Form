@@ -7,7 +7,63 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#CreateModal">
+        Create
+    </button>
+    <div class="modal fade" id="CreateModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+               
+                <div class="modal-header">
+                    <h5 class="modal-title">Create Employee</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+                    <form asp-action="Create" asp-controller="Employees" method="post">
+                   
+
+                        <div class="mb-3">
+                            <label class="form-label">Name</label>
+                            <input type="text" name="Name" class="form-control" required />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Family</label>
+                            <input type="text" name="Family" class="form-control" required />
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Comment</label>
+                            <textarea name="Description" class="form-control"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Boss Number</label>
+                            <textarea name="BossID" class="form-control"></textarea>
+                        </div>
+                      
+
+                        <div class="modal-footer px-0">
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+                                Exit
+                            </button>
+
+                            <button type="submit" class="btn btn-success">
+                                Add Employee
+                            </button>
+                        </div>
+
+                    </form>
+
+                </div>
+            
+
+            </div>
+        </div>
+    </div>
+  
 </p>
 <table class="table">
     <thead>
