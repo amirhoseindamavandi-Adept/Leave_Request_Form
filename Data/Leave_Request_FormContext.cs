@@ -12,6 +12,11 @@ public class Leave_Request_FormContext : DbContext
     {
     }
 
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Employee>().HasQueryFilter(x => x.IsRemoved == false);
+    }
+
     public DbSet<Leave_Request_Form.Models.Employee> Employee { get; set; } = default!;
     public DbSet<Leave_Request_Form.Models.LeaveRequest> LeaveRequest { get; set; }
 

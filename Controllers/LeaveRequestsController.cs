@@ -21,11 +21,11 @@ namespace Leave_Request_Form.Controllers
         // GET: LeaveRequests
         public async Task<IActionResult> Index()
         {
-            //var leave_Request_FormContext = _context.LeaveRequest.Include(l => l.Employee);
-            //return View(await leave_Request_FormContext.ToListAsync());
-            var userid = 1;
-            var request = _context.LeaveRequest.Where(x => x.EmployeeID == userid).ToList();
-            return View(request);
+            var leave_Request_FormContext = _context.LeaveRequest.Include(l => l.Employee);
+            return View(await leave_Request_FormContext.ToListAsync());
+
+            //var request = _context.LeaveRequest.Include(x => x.EmployeeID).ToListAsync();
+            //return View(request);
 
         }
 
@@ -62,9 +62,9 @@ namespace Leave_Request_Form.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(LeaveRequest leaveRequest) 
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                
+              
                 leaveRequest.CreatedAt = DateTime.Now;
                 leaveRequest.Status = LeaveRequestStatus.pending;
                 _context.Add(leaveRequest);
@@ -75,6 +75,32 @@ namespace Leave_Request_Form.Controllers
             return View(leaveRequest);
         }
 
+        public IActionResult Approved(int id)
+        {
+            var leave = _context.LeaveRequest.Find(id);
+            if (leave != null)
+            {
+                leave.Status = LeaveRequestStatus.Approved;
+                _context.SaveChanges();
+                return RedirectToAction(nameof(Index));
+            }
+
+            return NotFound();
+        }
+
+        public IActionResult Rejected(int id)
+        {
+            var leave = _context.LeaveRequest.Find(id);
+            if (leave!=null)
+            {
+                leave.Status= LeaveRequestStatus.Rejected;
+                _context.SaveChanges();
+                return RedirectToAction(nameof(Index));
+            }
+            return NotFound();
+            
+
+        }
         // GET: LeaveRequests/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {

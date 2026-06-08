@@ -1,5 +1,5 @@
-﻿
-
+﻿@using Microsoft.AspNetCore.SignalR
+@model List<LeaveRequest>
 
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#PendingRequestModal">
    Pending Request
@@ -15,7 +15,14 @@
                 </button>
             </div>
             <div class="modal-body">
-                
+             
+                <h5>
+                   @foreach (var item in Model.Where(x => x.Status == LeaveRequestStatus.pending))
+                   {
+                       <h5> item.Description </h5>
+                   }
+
+                </h5>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Rejected</button>
