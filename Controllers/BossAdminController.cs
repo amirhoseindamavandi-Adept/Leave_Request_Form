@@ -1,6 +1,7 @@
 ﻿using Leave_Request_Form.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using Microsoft.EntityFrameworkCore;
 
 namespace Leave_Request_Form.Controllers
 {
@@ -14,7 +15,7 @@ namespace Leave_Request_Form.Controllers
         }
         public IActionResult Pending()
         {
-            var pending = _context.LeaveRequest.Where(x => x.Status == LeaveRequestStatus.pending).ToList<LeaveRequest>();
+            var pending = _context.LeaveRequest.Include(x=>x.Employee).Where(x => x.Status == LeaveRequestStatus.pending).ToList<LeaveRequest>();
             return View(pending);
         }
 
