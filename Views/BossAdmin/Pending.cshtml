@@ -1,7 +1,6 @@
 ﻿@using Microsoft.AspNetCore.SignalR
 @using Microsoft.IdentityModel.Tokens
-@model List<LeaveRequest>
-
+@model EmployeeLeaveViewModel;
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#PendingRequestModal">
    Pending Request
 </button>
@@ -15,17 +14,28 @@
                     <span aria-hidden="true">&times; </span>
                 </button>
             </div>
-            <div class="modal-body">
-             
-               
-                   @foreach (var item in Model.Where(x => x.Status == LeaveRequestStatus.pending))
-                   {
-                     
-                       <h5> @item.Employee.Name @item.Employee.Family  @item.Description;</h5>
-                       
-                   }
-
+            <div class="form-group">
                 
+                <select asp-for="Employee.EmployeeID"
+                        class="form-control"
+                        asp-items="ViewBag.EmployeeID"
+                        id="employeeSelect">
+                </select>
+            
+            </div>
+            
+            <div class="modal-body">
+                <div class="modal-body">
+                    @foreach (var item in Model.LeaveRequests)
+                    {
+                        <h5>@item.Employee.Name @item.Employee.Family - @item.Description</h5>
+                    }
+                </div>
+
+             
+             
+
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Rejected</button>

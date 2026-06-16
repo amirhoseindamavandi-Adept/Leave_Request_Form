@@ -53,7 +53,9 @@
 
                             <button type="submit" class="btn btn-success">
                                 Add Employee
+                               
                             </button>
+                            
                         </div>
 
                     </form>
@@ -69,7 +71,9 @@
 <table class="table">
     <thead>
     <tr>
-      
+        <th>
+            @Html.DisplayNameFor(model => model.EmployeeID)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
@@ -97,6 +101,9 @@
     {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.EmployeeID)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
@@ -111,16 +118,27 @@
             <td>
                 @Html.DisplayFor(modelItem => item.BossID)
             </td>
-          @*   <td>
+            @*   <td>
                 @Html.DisplayFor(modelItem => item.IsRemoved)
             </td> *@
-          <td>
-              <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.EmployeeID"> Edit </a>
-              <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.EmployeeID">Details</a> |
-              <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.EmployeeID">Delete</a>
-          </td>
+            <td>
+                <a class="btn btn-primary" asp-action="Edit" asp-route-id="@item.EmployeeID"> Edit </a>
+                <a class="btn btn-primary" asp-action="Details" asp-route-id="@item.EmployeeID">Details</a> |
+                <a class="btn btn-danger" asp-action="Delete" asp-route-id="@item.EmployeeID">Delete</a>
+            </td>
         </tr>
     }
 }
     </tbody>
 </table>
+@* <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@if (TempData["Success"] != null)
+{
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: '@ViewData["Success"]'
+        });
+    </script>
+} *@

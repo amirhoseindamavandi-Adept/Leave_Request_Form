@@ -61,6 +61,7 @@ namespace Leave_Request_Form.Controllers
             {
                 _context.Add(employee);
                 await _context.SaveChangesAsync();
+                TempData["Success"] = "Employee created successfully!";
                 return RedirectToAction(nameof(Index));
             }
             return View(employee);
